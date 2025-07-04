@@ -1,0 +1,25 @@
+
+workflows:
+  dreamcatcher-ios:
+    name: DreamCatcher iOS Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        APP_ID: "com.yourname.dreamcatcher"
+    scripts:
+      - name: Install dependencies
+        script: |
+          flutter pub get
+      - name: Build iOS
+        script: |
+          flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/iphoneos/Runner.app
+      - build/ios/ipa
+    publishing:
+      email:
+        recipients:
+          - your@email.com
